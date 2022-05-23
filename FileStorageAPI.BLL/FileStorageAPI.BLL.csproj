@@ -11,4 +11,8 @@
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FileStorageAPI.DAL\FileStorageAPI.DAL.csproj" />
+  </ItemGroup>
+
 </Project>

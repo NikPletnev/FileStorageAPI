@@ -29,18 +29,18 @@ namespace FileStorageAPI.DAL.Repositories
             return entity.Entity.Id;
         }
 
-        public void UpdateCustomer(User newUser, User oldUser)
+        public void UpdateUser(User newUser, User oldUser)
         {
             oldUser.Name = newUser.Name;
             _context.SaveChanges();
         }
-        public void UpdateCustomer(int id, bool isDeleted)
+        public void UpdateUser(int id, bool isDeleted)
         {
             User user = GetUserById(id);
             user.IsDeleted = isDeleted;
             _context.SaveChanges();
         }
-        public void DeleteCustomerById(int id)
+        public void DeleteUserById(int id)
         {
             var user = GetUserById(id);
             _context.Users.Remove(user);

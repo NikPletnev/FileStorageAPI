@@ -8,9 +8,11 @@ namespace FileStorageAPI.DAL.Entity
 {
     public  class StoragedFile
     {
+        public int Id;
         public byte[] Data { get; set; }
         public string Name { get; set; }
         public int Size { get; set; } 
         public User User { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

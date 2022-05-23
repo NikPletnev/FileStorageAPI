@@ -47,7 +47,7 @@ namespace FileStorageAPI.DAL.Repositories
             _context.SaveChanges();
         }
 
-        public ICollection<StoragedFileRepository> GetStoragedFilesByUserId(int id)
+        public ICollection<StoragedFile> GetStoragedFilesByUserId(int id)
         {
             var user = GetUserById(id);
             return user.StoragedFiles;

@@ -8,6 +8,12 @@ namespace FileStorageAPI.DAL.Repositories
 {
     public class StoragedFileRepository
     {
+        private readonly FileStorageContext _context;
+
+        public StoragedFileRepository(FileStorageContext context)
+        {
+            _context = context;
+        }
 
     }
 }

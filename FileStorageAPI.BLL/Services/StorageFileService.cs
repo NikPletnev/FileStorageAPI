@@ -1,0 +1,58 @@
+﻿using AutoMapper;
+using FileStorageAPI.BLL.Models;
+using FileStorageAPI.DAL.Entity;
+using FileStorageAPI.DAL.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FileStorageAPI.BLL.Services
+{
+    public class StorageFileService
+    {
+        private readonly IStoragedFileRepository _repository;
+        private readonly IMapper _mapper;
+
+        public StorageFileService(IStoragedFileRepository repository, IMapper mapper)
+        {
+            _repository = repository;
+            _mapper = mapper;
+        }
+
+        public StoragedFileModel GetStoragedFileById(int id)
+        {
+            var storagedFile = _repository.GetStoragedFileById(id);
+            return _mapper.Map<StoragedFileModel>(storagedFile);
+        }
+
+        public List<StoragedFileModel> GetAllFiles()
+        {
+            var files = _repository.GetAllFiles();
+            return _mapper.Map<List<StoragedFileModel>>(files);
+        }
+
+        public int AddStoragedFile(StoragedFileModel file)
+        {
+            return _repository.AddStoragedFile(_mapper.Map<StoragedFile>(file));
+        }
+
+        public void UpdateStoragedFile(StoragedFileModel file)
+        {
+            var fileEntity = _repository.GetStoragedFileById(file.Id);
+            _repository.UpdateStoragedFile(_mapper.Map<StoragedFile>(file), fileEntity);
+        }
+
+        public void DeleteFileById(int id)
+        {
+            _repository.UpdateStoragedFile(id, true);
+        }
+
+        public void RestoreFileByid(int id)
+        {
+            _repository.UpdateStoragedFile(id, false);
+        }
+
+    }
+}

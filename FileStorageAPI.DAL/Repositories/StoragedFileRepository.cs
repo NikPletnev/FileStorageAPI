@@ -23,6 +23,7 @@ namespace FileStorageAPI.DAL.Repositories
 
         public int AddStoragedFile(StoragedFile file)
         {
+            file.User = GetFileOwnerByFileId(file.Id);
             var entity = _context.StoragedFiles.Add(file);
             _context.SaveChanges();
             return entity.Entity.Id;

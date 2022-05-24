@@ -12,6 +12,6 @@ namespace FileStorageAPI.BLL.Models
         public string Password { get; set; }
         public string Name { get; set; }
         public bool IsDeleted { get; set; }
-        public virtual List<StoragedFileModel> StoragedFiles { get; set; }
+        public List<StoragedFileModel> StoragedFiles { get; set; }
     }
 }

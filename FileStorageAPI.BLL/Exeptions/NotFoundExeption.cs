@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FileStorageAPI.BLL.Exeptions
 {
-    internal class NotFoundExeption : Exception
+    public class NotFoundExeption : Exception
     {
         public NotFoundExeption(string message) : base(message) { }
     }

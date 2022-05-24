@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FileStorageAPI.BLL.Exeptions;
 using FileStorageAPI.BLL.Models;
 using FileStorageAPI.DAL.Entity;
 using FileStorageAPI.DAL.Repositories;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace FileStorageAPI.BLL.Services
 {
-    public class StorageFileService
+    public class StorageFileService : IStorageFileService
     {
         private readonly IStoragedFileRepository _repository;
         private readonly IMapper _mapper;
@@ -41,7 +42,14 @@ namespace FileStorageAPI.BLL.Services
         public void UpdateStoragedFile(StoragedFileModel file)
         {
             var fileEntity = _repository.GetStoragedFileById(file.Id);
-            _repository.UpdateStoragedFile(_mapper.Map<StoragedFile>(file), fileEntity);
+            if (fileEntity != null)
+            {
+                _repository.UpdateStoragedFile(_mapper.Map<StoragedFile>(file), fileEntity);
+            }
+            else
+            {
+                throw new NotFoundExeption("File not found");
+            }
         }
 
         public void DeleteFileById(int id)

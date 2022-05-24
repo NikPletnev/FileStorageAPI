@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FileStorageAPI.BLL.Exeptions;
 using FileStorageAPI.BLL.Models;
 using FileStorageAPI.DAL.Entity;
 using FileStorageAPI.DAL.Repositories;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace FileStorageAPI.BLL.Services
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
@@ -41,7 +42,14 @@ namespace FileStorageAPI.BLL.Services
         public void UpdateUser(UserModel userModel)
         {
             var userEntity = _repository.GetUserById(userModel.Id);
-            _repository.UpdateUser(_mapper.Map<User>(userModel), userEntity);
+            if (userEntity != null)
+            {
+                _repository.UpdateUser(_mapper.Map<User>(userModel), userEntity);
+            }
+            else
+            {
+                throw new NotFoundExeption("File not found");
+            }
         }
 
         public void DeleteUser(int id)

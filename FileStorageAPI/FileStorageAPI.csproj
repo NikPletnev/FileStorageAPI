@@ -22,4 +22,9 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FileStorageAPI.BLL\FileStorageAPI.BLL.csproj" />
+    <ProjectReference Include="..\FileStorageAPI.DAL\FileStorageAPI.DAL.csproj" />
+  </ItemGroup>
+
 </Project>

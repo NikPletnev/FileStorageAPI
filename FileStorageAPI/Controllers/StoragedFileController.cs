@@ -11,12 +11,12 @@ namespace FileStorageAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class StoragedFileController : Controller
+    public class StoragedFileController : BaseController
     {
         private readonly IStorageFileService _storagedFileSirvice;
         private readonly IMapper _mapper;
 
-        public StoragedFileController(IMapper mapper, IStorageFileService storagedFileSirvice)
+        public StoragedFileController(IMapper mapper, IStorageFileService storagedFileSirvice, ILogger<StoragedFileController> logger) : base(logger)
         {
             _storagedFileSirvice = storagedFileSirvice;
             _mapper = mapper;

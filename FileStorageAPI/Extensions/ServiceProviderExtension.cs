@@ -3,6 +3,7 @@ using FileStorageAPI.DAL;
 using FileStorageAPI.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using NLog.Extensions.Logging;
 
 namespace FileStorageAPI.Extensions
 {
@@ -20,11 +21,22 @@ namespace FileStorageAPI.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
         }
 
-        public static void AddConnectionString(this IServiceCollection services)
+        public static void AddConnectionString(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<FileStorageContext>(
                 options => options.UseSqlServer(
-            @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=FileStorageDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+            connectionString));
+        }
+
+        public static void RegisterLogger(this IServiceCollection service, IConfiguration config)
+        {
+            service.Configure<ConsoleLifetimeOptions>(opts => opts.SuppressStatusMessages = true);
+            service.AddLogging(loggingBuilder =>
+            {
+                loggingBuilder.ClearProviders();
+                loggingBuilder.SetMinimumLevel(LogLevel.Information);
+                loggingBuilder.AddNLog(config);
+            });
         }
 
         public static void AddSwagger(this IServiceCollection services)

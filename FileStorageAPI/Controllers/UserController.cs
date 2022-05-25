@@ -12,12 +12,12 @@ namespace FileStorageAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public UserController(IMapper mapper, IUserService userService)
+        public UserController(IMapper mapper, IUserService userService, ILogger<StoragedFileController> logger) : base(logger)
         {
             _userService = userService;
             _mapper = mapper;
@@ -35,6 +35,7 @@ namespace FileStorageAPI.Controllers
         [SwaggerOperation(Summary = "Get all users")]
         public async Task<ActionResult<List<UserOutputModel>>> GetAllUsers()
         {
+            
             var users = await _userService.GetAllUsers();
             return Ok(_mapper.Map<List<UserOutputModel>>(users));
         }

@@ -26,6 +26,16 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "NPProfile": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "LOG_DIRECTORY": "C:/Users/Pletnev/source/repos/FileStorageAPI",
+        "CONNECTION_STRING": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=FileStorageDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
   }
 }

@@ -28,7 +28,7 @@ namespace FileStorageAPI.Controllers
         public ActionResult<UserOutputModel> GetUserById(int id)
         {
             var user = _userService.GetUserById(id);
-            return Ok(_mapper.Map<UserModel>(user));
+            return Ok(_mapper.Map<UserOutputModel>(user));
         }
 
         [HttpGet("all")]

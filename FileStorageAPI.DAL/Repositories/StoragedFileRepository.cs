@@ -1,4 +1,5 @@
 ﻿using FileStorageAPI.DAL.Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +16,19 @@ namespace FileStorageAPI.DAL.Repositories
         {
             _context = context;
         }
-        public StoragedFile GetStoragedFileById(int id) =>
-            _context.StoragedFiles.FirstOrDefault(x => x.Id == id);
+        public StoragedFile GetStoragedFileById(int id)
+        {
+            return _context.StoragedFiles.Where(x => x.Id == id).Include(w => w.User).FirstOrDefault();
+        }
 
         public List<StoragedFile> GetAllFiles() =>
             _context.StoragedFiles.Where(d => !d.IsDeleted).ToList();
 
-        public int AddStoragedFile(StoragedFile file)
+        public int AddStoragedFile(StoragedFile file, User user)
         {
-            file.User = GetFileOwnerByFileId(file.Id);
+            file.User = user;
             var entity = _context.StoragedFiles.Add(file);
+            _context.Users.FirstOrDefault(d => d.Id == user.Id).StoragedFiles.Add(file);
             _context.SaveChanges();
             return entity.Entity.Id;
         }

@@ -4,7 +4,7 @@ namespace FileStorageAPI.DAL.Repositories
 {
     public interface IStoragedFileRepository
     {
-        int AddStoragedFile(StoragedFile file);
+        int AddStoragedFile(StoragedFile file, User user);
         void DeleteStoragedFileById(int id);
         List<StoragedFile> GetAllFiles();
         User GetFileOwnerByFileId(int id);

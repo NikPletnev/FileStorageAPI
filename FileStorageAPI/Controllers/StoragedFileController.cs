@@ -16,12 +16,18 @@ namespace FileStorageAPI.Controllers
         private readonly IStorageFileService _storagedFileSirvice;
         private readonly IMapper _mapper;
 
+        public StoragedFileController(IMapper mapper, IStorageFileService storagedFileSirvice)
+        {
+            _storagedFileSirvice = storagedFileSirvice;
+            _mapper = mapper;
+        }
+
         [HttpGet("{id}")]
         [SwaggerOperation(Summary = "Get file by id")]
         public ActionResult<StoragedFileOutputModel> GetFileById(int id)
         {
             var file = _storagedFileSirvice.GetStoragedFileById(id);
-            return Ok(_mapper.Map<StoragedFileModel>(file));
+            return Ok(_mapper.Map<StoragedFileOutputModel>(file));
         }
 
         [HttpGet("all")]

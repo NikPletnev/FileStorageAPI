@@ -14,11 +14,13 @@ namespace FileStorageAPI.BLL.Services
     public class StorageFileService : IStorageFileService
     {
         private readonly IStoragedFileRepository _repository;
+        private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public StorageFileService(IStoragedFileRepository repository, IMapper mapper)
+        public StorageFileService(IStoragedFileRepository repository, IUserRepository userRepository, IMapper mapper)
         {
             _repository = repository;
+            _userRepository = userRepository;
             _mapper = mapper;
         }
 
@@ -36,7 +38,8 @@ namespace FileStorageAPI.BLL.Services
 
         public int AddStoragedFile(StoragedFileModel file)
         {
-            return _repository.AddStoragedFile(_mapper.Map<StoragedFile>(file));
+            var userEntitry = _userRepository.GetUserById(file.User.Id);
+            return _repository.AddStoragedFile(_mapper.Map<StoragedFile>(file), userEntitry);
         }
 
         public void UpdateStoragedFile(StoragedFileModel file)

@@ -17,6 +17,11 @@ namespace FileStorageAPI.Configs
         {
             CreateMap<UserModel, UserOutputModel>();
             CreateMap<UserInputModel, UserModel>();
+
+            CreateMap<StoragedFileModel, StoragedFileOutputModel>();
+            CreateMap<StoragedFileInputModel, StoragedFileModel>()
+                .ForMember(m => m.User, opt => opt.MapFrom(o => new UserModel { Id = o.UserId}));
+
         }
 
     }

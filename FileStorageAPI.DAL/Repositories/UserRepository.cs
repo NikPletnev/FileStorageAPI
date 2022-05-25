@@ -17,10 +17,14 @@ namespace FileStorageAPI.DAL.Repositories
             _context = context;
         }
         public User GetUserById(int? id) =>
-            _context.Users.FirstOrDefault(x => x.Id == id);
+            _context.Users.Where(x => x.Id == id)
+            .Include(w => w.StoragedFiles)
+            .FirstOrDefault();
 
         public List<User> GetAllUsers() =>
-            _context.Users.Where(d => !d.IsDeleted).ToList();
+            _context.Users.Where(d => !d.IsDeleted)
+            .Include(w => w.StoragedFiles)
+            .ToList();
 
         public int AddUser(User user)
         {

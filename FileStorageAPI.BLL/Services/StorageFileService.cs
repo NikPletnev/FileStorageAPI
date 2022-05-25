@@ -24,30 +24,30 @@ namespace FileStorageAPI.BLL.Services
             _mapper = mapper;
         }
 
-        public StoragedFileModel GetStoragedFileById(int id)
+        public async Task<StoragedFileModel> GetStoragedFileById(int id)
         {
-            var storagedFile = _repository.GetStoragedFileById(id);
+            var storagedFile = await _repository.GetStoragedFileById(id);
             return _mapper.Map<StoragedFileModel>(storagedFile);
         }
 
-        public List<StoragedFileModel> GetAllFiles()
+        public async Task<List<StoragedFileModel>> GetAllFiles()
         {
-            var files = _repository.GetAllFiles();
+            var files = await _repository.GetAllFiles();
             return _mapper.Map<List<StoragedFileModel>>(files);
         }
 
-        public int AddStoragedFile(StoragedFileModel file)
+        public async Task<int> AddStoragedFile(StoragedFileModel file)
         {
-            var userEntitry = _userRepository.GetUserById(file.User.Id);
-            return _repository.AddStoragedFile(_mapper.Map<StoragedFile>(file), userEntitry);
+            var userEntitry = await _userRepository.GetUserById(file.User.Id);
+            return await _repository.AddStoragedFile(_mapper.Map<StoragedFile>(file), userEntitry);
         }
 
-        public void UpdateStoragedFile(StoragedFileModel file)
+        public async Task UpdateStoragedFile(StoragedFileModel file)
         {
-            var fileEntity = _repository.GetStoragedFileById(file.Id);
+            var fileEntity = await _repository.GetStoragedFileById(file.Id);
             if (fileEntity != null)
             {
-                _repository.UpdateStoragedFile(_mapper.Map<StoragedFile>(file), fileEntity);
+                await _repository.UpdateStoragedFile(_mapper.Map<StoragedFile>(file), fileEntity);
             }
             else
             {
@@ -55,14 +55,14 @@ namespace FileStorageAPI.BLL.Services
             }
         }
 
-        public void DeleteFileById(int id)
+        public async Task DeleteFileById(int id)
         {
-            _repository.UpdateStoragedFile(id, true);
+            await _repository.UpdateStoragedFile(id, true);
         }
 
-        public void RestoreFileByid(int id)
+        public async Task RestoreFileByid(int id)
         {
-            _repository.UpdateStoragedFile(id, false);
+            await _repository.UpdateStoragedFile(id, false);
         }
 
     }

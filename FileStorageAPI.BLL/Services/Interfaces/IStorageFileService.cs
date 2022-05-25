@@ -4,11 +4,11 @@ namespace FileStorageAPI.BLL.Services
 {
     public interface IStorageFileService
     {
-        int AddStoragedFile(StoragedFileModel file);
-        void DeleteFileById(int id);
-        List<StoragedFileModel> GetAllFiles();
-        StoragedFileModel GetStoragedFileById(int id);
-        void RestoreFileByid(int id);
-        void UpdateStoragedFile(StoragedFileModel file);
+        Task<int> AddStoragedFile(StoragedFileModel file);
+        Task DeleteFileById(int id);
+        Task<List<StoragedFileModel>> GetAllFiles();
+        Task<StoragedFileModel> GetStoragedFileById(int id);
+        Task RestoreFileByid(int id);
+        Task UpdateStoragedFile(StoragedFileModel file);
     }
 }

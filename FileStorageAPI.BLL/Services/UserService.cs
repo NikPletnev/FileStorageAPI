@@ -22,29 +22,29 @@ namespace FileStorageAPI.BLL.Services
             _mapper = mapper;
         }
 
-        public UserModel GetUserById(int id)
+        public async Task<UserModel> GetUserById(int id)
         {
-            var userEntity = _repository.GetUserById(id);
+            var userEntity = await _repository.GetUserById(id);
             return _mapper.Map<UserModel>(userEntity);
         }
 
-        public List<UserModel> GetAllUsers()
+        public async Task<List<UserModel>> GetAllUsers()
         {
-            var users = _repository.GetAllUsers();
+            var users = await _repository.GetAllUsers();
             return _mapper.Map<List<UserModel>>(users);
         }
 
-        public int AddUser(UserModel userModel)
+        public async Task<int> AddUser(UserModel userModel)
         {
-            return _repository.AddUser(_mapper.Map<User>(userModel));
+            return await _repository.AddUser(_mapper.Map<User>(userModel));
         }
 
-        public void UpdateUser(UserModel userModel)
+        public async Task UpdateUser(UserModel userModel)
         {
-            var userEntity = _repository.GetUserById(userModel.Id);
+            var userEntity = await _repository.GetUserById(userModel.Id);
             if (userEntity != null)
             {
-                _repository.UpdateUser(_mapper.Map<User>(userModel), userEntity);
+                await _repository.UpdateUser(_mapper.Map<User>(userModel), userEntity);
             }
             else
             {
@@ -52,19 +52,19 @@ namespace FileStorageAPI.BLL.Services
             }
         }
 
-        public void DeleteUser(int id)
+        public async Task DeleteUser(int id)
         {
-            _repository.UpdateUser(id, true);
+            await _repository.UpdateUser(id, true);
         }
 
-        public void RestoreUser(int id)
+        public async Task RestoreUser(int id)
         {
-            _repository.UpdateUser(id, false);
+            await _repository.UpdateUser(id, false);
         }
 
-        public List<StoragedFileModel> GetUserFiles(int? id)
+        public async Task<List<StoragedFileModel>> GetUserFiles(int? id)
         {
-            var files = _repository.GetStoragedFilesByUserId(id);
+            var files = await _repository.GetStoragedFilesByUserId(id);
             return _mapper.Map<List<StoragedFileModel>>(files);
         }
 

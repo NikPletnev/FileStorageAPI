@@ -4,12 +4,12 @@ namespace FileStorageAPI.BLL.Services
 {
     public interface IUserService
     {
-        int AddUser(UserModel userModel);
-        void DeleteUser(int id);
-        List<UserModel> GetAllUsers();
-        UserModel GetUserById(int id);
-        List<StoragedFileModel> GetUserFiles(int? id);
-        void RestoreUser(int id);
-        void UpdateUser(UserModel userModel);
+        Task<int> AddUser(UserModel userModel);
+        Task DeleteUser(int id);
+        Task<List<UserModel>> GetAllUsers();
+        Task<UserModel> GetUserById(int id);
+        Task<List<StoragedFileModel>> GetUserFiles(int? id);
+        Task RestoreUser(int id);
+        Task UpdateUser(UserModel userModel);
     }
 }

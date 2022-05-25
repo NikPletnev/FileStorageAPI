@@ -16,46 +16,47 @@ namespace FileStorageAPI.DAL.Repositories
         {
             _context = context;
         }
-        public StoragedFile GetStoragedFileById(int id)
+
+        public async Task<StoragedFile> GetStoragedFileById(int id)
         {
-            return _context.StoragedFiles.Where(x => x.Id == id).Include(w => w.User).FirstOrDefault();
+            return await _context.StoragedFiles.Where(x => x.Id == id).Include(w => w.User).FirstOrDefaultAsync();
         }
 
-        public List<StoragedFile> GetAllFiles() =>
-            _context.StoragedFiles.Where(d => !d.IsDeleted).ToList();
+        public async Task<List<StoragedFile>> GetAllFiles() =>
+            await _context.StoragedFiles.Where(d => !d.IsDeleted).ToListAsync();
 
-        public int AddStoragedFile(StoragedFile file, User user)
+        public async Task<int> AddStoragedFile(StoragedFile file, User user)
         {
             file.User = user;
-            var entity = _context.StoragedFiles.Add(file);
-            _context.Users.FirstOrDefault(d => d.Id == user.Id).StoragedFiles.Add(file);
-            _context.SaveChanges();
+            var entity = await _context.StoragedFiles.AddAsync(file);
+            _context.Users.FirstOrDefaultAsync(d => d.Id == user.Id).Result.StoragedFiles.Add(file);
+            await _context.SaveChangesAsync();
             return entity.Entity.Id;
         }
 
-        public void UpdateStoragedFile(StoragedFile newFile, StoragedFile oldFile)
+        public async Task UpdateStoragedFile(StoragedFile newFile, StoragedFile oldFile)
         {
             oldFile.Name = newFile.Name;
             oldFile.User = newFile.User;
             oldFile.Data = newFile.Data;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public void UpdateStoragedFile(int id, bool isDeleted)
+        public async Task UpdateStoragedFile(int id, bool isDeleted)
         {
-            var file = GetStoragedFileById(id);
+            var file = await GetStoragedFileById(id);
             file.IsDeleted = isDeleted;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public void DeleteStoragedFileById(int id)
+        public async Task DeleteStoragedFileById(int id)
         {
-            var file = GetStoragedFileById(id);
+            var file = await GetStoragedFileById(id);
             _context.StoragedFiles.Remove(file);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public User GetFileOwnerByFileId(int id)
+        public async Task<User> GetFileOwnerByFileId(int id)
         {
-            var file = GetStoragedFileById(id);
+            var file = await GetStoragedFileById(id);
             return file.User;
         }
     }

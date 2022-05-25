@@ -16,44 +16,44 @@ namespace FileStorageAPI.DAL.Repositories
         {
             _context = context;
         }
-        public User GetUserById(int? id) =>
-            _context.Users.Where(x => x.Id == id)
+        public async Task<User> GetUserById(int? id) =>
+            await _context.Users.Where(x => x.Id == id)
             .Include(w => w.StoragedFiles)
-            .FirstOrDefault();
+            .FirstOrDefaultAsync();
 
-        public List<User> GetAllUsers() =>
-            _context.Users.Where(d => !d.IsDeleted)
+        public async Task<List<User>> GetAllUsers() =>
+            await _context.Users.Where(d => !d.IsDeleted)
             .Include(w => w.StoragedFiles)
-            .ToList();
+            .ToListAsync();
 
-        public int AddUser(User user)
+        public async Task<int> AddUser(User user)
         {
-            var entity = _context.Users.Add(user);
-            _context.SaveChanges();
+            var entity = await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
             return entity.Entity.Id;
         }
 
-        public void UpdateUser(User newUser, User oldUser)
+        public async Task UpdateUser(User newUser, User oldUser)
         {
             oldUser.Name = newUser.Name;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public void UpdateUser(int id, bool isDeleted)
+        public async Task UpdateUser(int id, bool isDeleted)
         {
-            User user = GetUserById(id);
+            User user = await GetUserById(id);
             user.IsDeleted = isDeleted;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public void DeleteUserById(int id)
+        public async Task DeleteUserById(int id)
         {
-            var user = GetUserById(id);
+            var user = await GetUserById(id);
             _context.Users.Remove(user);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public ICollection<StoragedFile> GetStoragedFilesByUserId(int? id)
+        public async Task<ICollection<StoragedFile>> GetStoragedFilesByUserId(int? id)
         {
-            var user = GetUserById(id);
+            var user = await GetUserById(id);
             return user.StoragedFiles;
         }
     }

@@ -24,31 +24,31 @@ namespace FileStorageAPI.Controllers
 
         [HttpGet("{id}")]
         [SwaggerOperation(Summary = "Get file by id")]
-        public ActionResult<StoragedFileOutputModel> GetFileById(int id)
+        public async Task<ActionResult<StoragedFileOutputModel>> GetFileById(int id)
         {
-            var file = _storagedFileSirvice.GetStoragedFileById(id);
+            var file = await _storagedFileSirvice.GetStoragedFileById(id);
             return Ok(_mapper.Map<StoragedFileOutputModel>(file));
         }
 
         [HttpGet("all")]
         [SwaggerOperation(Summary = "Get all files")]
-        public ActionResult<List<StoragedFileOutputModel>> GetAllFiles()
+        public async Task<ActionResult<List<StoragedFileOutputModel>>> GetAllFiles()
         {
-            var files = _storagedFileSirvice.GetAllFiles();
+            var files = await _storagedFileSirvice.GetAllFiles();
             return Ok(_mapper.Map<List<StoragedFileOutputModel>>(files));
         }
 
         [HttpPost]
         [SwaggerOperation(Summary = "Add new file")]
-        public ActionResult<int> PostUser(StoragedFileInputModel model)
+        public async Task<ActionResult<int>> PostUser(StoragedFileInputModel model)
         {
-            var fileId = _storagedFileSirvice.AddStoragedFile(_mapper.Map<StoragedFileModel>(model));
+            var fileId = await _storagedFileSirvice.AddStoragedFile(_mapper.Map<StoragedFileModel>(model));
             return Ok(fileId);
         }
 
         [HttpPut]
         [SwaggerOperation(Summary = "Update file")]
-        public ActionResult UpdateFile(StoragedFileInputModel model)
+        public async Task<ActionResult> UpdateFile(StoragedFileInputModel model)
         {
             _storagedFileSirvice.UpdateStoragedFile(_mapper.Map<StoragedFileModel>(model));
             return Ok();
@@ -56,17 +56,17 @@ namespace FileStorageAPI.Controllers
 
         [HttpDelete("{id}")]
         [SwaggerOperation(Summary = "Delete file by id")]
-        public ActionResult DeleteFileById(int id)
+        public async Task<ActionResult> DeleteFileById(int id)
         {
-            _storagedFileSirvice.DeleteFileById(id);
+            await _storagedFileSirvice.DeleteFileById(id);
             return Ok();
         }
 
         [HttpPatch]
         [SwaggerOperation(Summary = "Restore file by id")]
-        public ActionResult RestoreFile(int id)
+        public async Task<ActionResult> RestoreFile(int id)
         {
-            _storagedFileSirvice.RestoreFileByid(id);
+            await _storagedFileSirvice.RestoreFileByid(id);
             return Ok();
         }
 

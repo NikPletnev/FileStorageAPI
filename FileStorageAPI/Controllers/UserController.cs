@@ -25,57 +25,57 @@ namespace FileStorageAPI.Controllers
 
         [HttpGet("{id}")]
         [SwaggerOperation(Summary = "Get user by id")]
-        public ActionResult<UserOutputModel> GetUserById(int id)
+        public async Task<ActionResult<UserOutputModel>> GetUserById(int id)
         {
-            var user = _userService.GetUserById(id);
+            var user = await _userService.GetUserById(id);
             return Ok(_mapper.Map<UserOutputModel>(user));
         }
 
         [HttpGet("all")]
         [SwaggerOperation(Summary = "Get all users")]
-        public ActionResult<List<UserOutputModel>> GetAllUsers()
+        public async Task<ActionResult<List<UserOutputModel>>> GetAllUsers()
         {
-            var users = _userService.GetAllUsers();
+            var users = await _userService.GetAllUsers();
             return Ok(_mapper.Map<List<UserOutputModel>>(users));
         }
 
         [HttpPost]
         [SwaggerOperation(Summary = "Add new user")]
-        public ActionResult<int> PostUser(UserInputModel model)
+        public async Task<ActionResult<int>> PostUser(UserInputModel model)
         {
-            var userId = _userService.AddUser(_mapper.Map<UserModel>(model));
+            var userId = await _userService.AddUser(_mapper.Map<UserModel>(model));
             return Ok(userId);
         }
 
         [HttpPut]
         [SwaggerOperation(Summary = "Update user")]
-        public ActionResult UpdateUser(UserInputModel model)
+        public async Task<ActionResult> UpdateUser(UserInputModel model)
         {
-            _userService.UpdateUser(_mapper.Map<UserModel>(model));
+            await _userService.UpdateUser(_mapper.Map<UserModel>(model));
             return Ok();
         }
 
         [HttpDelete("{id}")]
         [SwaggerOperation(Summary = "Delete user by id")]
-        public ActionResult DeleteUserById(int id)
+        public async Task<ActionResult> DeleteUserById(int id)
         {
-            _userService.DeleteUser(id);
+            await _userService.DeleteUser(id);
             return Ok();
         }
 
         [HttpPatch]
         [SwaggerOperation(Summary = "Restore user by id")]
-        public ActionResult RestoreUser(int id)
+        public async Task<ActionResult> RestoreUser(int id)
         {
-            _userService.RestoreUser(id);
+            await _userService.RestoreUser(id);
             return Ok();
         }
 
         [HttpGet("{id}/files")]
         [SwaggerOperation(Summary = "Get user files")]
-        public ActionResult<List<StoragedFileOutputModel>> GetUserFiles(int id)
+        public async Task<ActionResult<List<StoragedFileOutputModel>>> GetUserFiles(int id)
         {
-            var files = _userService.GetUserFiles(id);
+            var files = await _userService.GetUserFiles(id);
             return Ok(_mapper.Map<List<StoragedFileOutputModel>>(files));
         }
     }

@@ -9,7 +9,7 @@ namespace FileStorageAPI.DAL.Entity
 {
     public  class StoragedFile
     {
-        public int Id;
+        public int Id { get; set; }
         [MaxLength(30)]
         public byte[] Data { get; set; }
         public string Name { get; set; }

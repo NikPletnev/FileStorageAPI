@@ -14,7 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.RegisterFileStorageServices();
 builder.Services.RegisterDogSitterRepositories();
 builder.Services.AddConnectionString();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwagger();
 
 var app = builder.Build();
 

@@ -62,7 +62,7 @@ namespace FileStorageAPI.BLL.Services
             _repository.UpdateUser(id, false);
         }
 
-        public List<StoragedFileModel> GetUserFiles(int id)
+        public List<StoragedFileModel> GetUserFiles(int? id)
         {
             var files = _repository.GetStoragedFilesByUserId(id);
             return _mapper.Map<List<StoragedFileModel>>(files);

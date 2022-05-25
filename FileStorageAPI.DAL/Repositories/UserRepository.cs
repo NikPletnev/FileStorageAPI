@@ -16,7 +16,7 @@ namespace FileStorageAPI.DAL.Repositories
         {
             _context = context;
         }
-        public User GetUserById(int id) =>
+        public User GetUserById(int? id) =>
             _context.Users.FirstOrDefault(x => x.Id == id);
 
         public List<User> GetAllUsers() =>
@@ -47,7 +47,7 @@ namespace FileStorageAPI.DAL.Repositories
             _context.SaveChanges();
         }
 
-        public ICollection<StoragedFile> GetStoragedFilesByUserId(int id)
+        public ICollection<StoragedFile> GetStoragedFilesByUserId(int? id)
         {
             var user = GetUserById(id);
             return user.StoragedFiles;

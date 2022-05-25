@@ -8,7 +8,7 @@ namespace FileStorageAPI.BLL.Services
         void DeleteUser(int id);
         List<UserModel> GetAllUsers();
         UserModel GetUserById(int id);
-        List<StoragedFileModel> GetUserFiles(int id);
+        List<StoragedFileModel> GetUserFiles(int? id);
         void RestoreUser(int id);
         void UpdateUser(UserModel userModel);
     }

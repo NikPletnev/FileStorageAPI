@@ -44,12 +44,6 @@ namespace FileStorageAPI.DAL.Repositories
             user.IsDeleted = isDeleted;
             await _context.SaveChangesAsync();
         }
-        public async Task DeleteUserById(int id)
-        {
-            var user = await GetUserById(id);
-            _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-        }
 
         public async Task<ICollection<StoragedFile>> GetStoragedFilesByUserId(int? id)
         {

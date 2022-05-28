@@ -5,7 +5,6 @@ namespace FileStorageAPI.DAL.Repositories
     public interface IUserRepository
     {
         Task<int> AddUser(User user);
-        Task DeleteUserById(int id);
         Task<List<User>> GetAllUsers();
         Task<ICollection<StoragedFile>> GetStoragedFilesByUserId(int? id);
         Task<User> GetUserById(int? id);

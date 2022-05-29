@@ -23,7 +23,7 @@ namespace FileStorageAPI.Controllers
             var token = await _authService.GetToken(await _authService.GetUserForLogin(authInputModel.Name,
                 authInputModel.Password));
 
-            return Json(token);
+            return Ok(token);
         }
 
     }

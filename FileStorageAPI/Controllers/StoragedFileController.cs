@@ -4,6 +4,7 @@ using FileStorageAPI.BLL.Services;
 using FileStorageAPI.Extensions;
 using FileStorageAPI.Models.InputModels;
 using FileStorageAPI.Models.OutputModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -38,14 +39,16 @@ namespace FileStorageAPI.Controllers
             return Ok(_mapper.Map<List<StoragedFileOutputModel>>(files));
         }
 
+        [Authorize]
         [HttpPost]
         [SwaggerOperation(Summary = "Add new file")]
-        public async Task<ActionResult<int>> PostUser(StoragedFileInputModel model)
+        public async Task<ActionResult<int>> PostFile(StoragedFileInputModel model)
         {
             var fileId = await _storagedFileSirvice.AddStoragedFile(_mapper.Map<StoragedFileModel>(model));
             return Ok(fileId);
         }
 
+        [Authorize]
         [HttpPut]
         [SwaggerOperation(Summary = "Update file")]
         public async Task<ActionResult> UpdateFile(StoragedFileInputModel model)
@@ -54,6 +57,7 @@ namespace FileStorageAPI.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         [SwaggerOperation(Summary = "Delete file by id")]
         public async Task<ActionResult> DeleteFileById(int id)
@@ -62,6 +66,7 @@ namespace FileStorageAPI.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpPatch]
         [SwaggerOperation(Summary = "Restore file by id")]
         public async Task<ActionResult> RestoreFile(int id)

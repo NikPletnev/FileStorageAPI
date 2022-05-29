@@ -25,6 +25,7 @@ builder.Services.RegisterFileStorageServices();
 builder.Services.RegisterDogSitterRepositories();
 builder.Services.AddConnectionString(connString);
 builder.Services.AddSwagger();
+builder.Services.AddCustomAuth();
 builder.Services.RegisterLogger(config);
 
 var app = builder.Build();
@@ -38,6 +39,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseMiddleware<GlobalExeptionHandler>();

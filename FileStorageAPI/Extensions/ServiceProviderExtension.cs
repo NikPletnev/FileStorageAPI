@@ -1,7 +1,10 @@
-﻿using FileStorageAPI.BLL.Services;
+﻿using FileStorageAPI.BLL.Configs;
+using FileStorageAPI.BLL.Services;
 using FileStorageAPI.DAL;
 using FileStorageAPI.DAL.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Extensions.Logging;
 
@@ -13,6 +16,7 @@ namespace FileStorageAPI.Extensions
         {
             services.AddScoped<IStorageFileService, StorageFileService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
         }
 
         public static void RegisterDogSitterRepositories(this IServiceCollection services)
@@ -69,6 +73,24 @@ namespace FileStorageAPI.Extensions
                     }
                 });
             });
+        }
+        public static void AddCustomAuth(this IServiceCollection services)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidIssuer = AuthOptions.Issuer,
+                        ValidateAudience = true,
+                        ValidAudience = AuthOptions.Audience,
+                        ValidateLifetime = true,
+                        IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+                        ValidateIssuerSigningKey = true,
+                    };
+                });
+            services.AddAuthorization();
         }
 
     }

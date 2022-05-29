@@ -4,6 +4,7 @@ using FileStorageAPI.BLL.Services;
 using FileStorageAPI.Extensions;
 using FileStorageAPI.Models.InputModels;
 using FileStorageAPI.Models.OutputModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -23,6 +24,7 @@ namespace FileStorageAPI.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         [SwaggerOperation(Summary = "Get user by id")]
         public async Task<ActionResult<UserOutputModel>> GetUserById(int id)
@@ -35,7 +37,6 @@ namespace FileStorageAPI.Controllers
         [SwaggerOperation(Summary = "Get all users")]
         public async Task<ActionResult<List<UserOutputModel>>> GetAllUsers()
         {
-            
             var users = await _userService.GetAllUsers();
             return Ok(_mapper.Map<List<UserOutputModel>>(users));
         }
@@ -48,6 +49,7 @@ namespace FileStorageAPI.Controllers
             return Ok(userId);
         }
 
+        [Authorize]
         [HttpPut]
         [SwaggerOperation(Summary = "Update user")]
         public async Task<ActionResult> UpdateUser(UserInputModel model)
@@ -72,6 +74,7 @@ namespace FileStorageAPI.Controllers
             return Ok();
         }
 
+        [Authorize]
         [HttpGet("{id}/files")]
         [SwaggerOperation(Summary = "Get user files")]
         public async Task<ActionResult<List<StoragedFileOutputModel>>> GetUserFiles(int id)

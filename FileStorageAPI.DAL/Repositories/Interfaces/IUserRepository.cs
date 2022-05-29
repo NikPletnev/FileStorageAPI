@@ -8,6 +8,7 @@ namespace FileStorageAPI.DAL.Repositories
         Task<List<User>> GetAllUsers();
         Task<ICollection<StoragedFile>> GetStoragedFilesByUserId(int? id);
         Task<User> GetUserById(int? id);
+        Task<User> GetUserByName(string userName);
         Task UpdateUser(int id, bool isDeleted);
         Task UpdateUser(User newUser, User oldUser);
     }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FileStorageAPI.BLL.Exeptions;
+using FileStorageAPI.BLL.Helpers;
 using FileStorageAPI.BLL.Models;
 using FileStorageAPI.DAL.Entity;
 using FileStorageAPI.DAL.Repositories;
@@ -36,6 +37,7 @@ namespace FileStorageAPI.BLL.Services
 
         public async Task<int> AddUser(UserModel userModel)
         {
+            userModel.Password = PasswordHash.HashPassword(userModel.Password);
             return await _repository.AddUser(_mapper.Map<User>(userModel));
         }
 

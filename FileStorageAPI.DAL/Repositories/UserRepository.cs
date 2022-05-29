@@ -50,5 +50,12 @@ namespace FileStorageAPI.DAL.Repositories
             var user = await GetUserById(id);
             return user.StoragedFiles;
         }
+
+        public async Task<User> GetUserByName(string userName)
+        {
+            return await _context.Users.Where(x => x.Name == userName)
+            .Include(w => w.StoragedFiles)
+            .FirstOrDefaultAsync();
+        }
     }
 }

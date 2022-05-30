@@ -1,0 +1,125 @@
+2022-05-30 20:20:58.4085 | Microsoft.Extensions.Logging.LoggingExtensions.UsingProfileAsKeyRepositoryWithDPAPI | INFO | User profile is available. Using 'C:\Users\Pletnev\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-05-30 20:20:58.5863 | Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync | INFO | Now listening on: https://localhost:5001
+2022-05-30 20:20:58.5863 | Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync | INFO | Now listening on: http://localhost:5000
+2022-05-30 20:20:59.2274 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestStarting | INFO | Request starting HTTP/2 GET https://localhost:5001/swagger/index.html - -
+2022-05-30 20:20:59.4018 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestFinished | INFO | Request finished HTTP/2 GET https://localhost:5001/swagger/index.html - - - 200 - text/html;charset=utf-8 175.3708ms
+2022-05-30 20:20:59.4108 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestStarting | INFO | Request starting HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - -
+2022-05-30 20:20:59.4108 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestFinished | INFO | Request finished HTTP/2 GET https://localhost:5001/_framework/aspnetcore-browser-refresh.js - - - 200 11986 application/javascript;+charset=utf-8 2.8182ms
+2022-05-30 20:20:59.4908 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestStarting | INFO | Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - -
+2022-05-30 20:20:59.5618 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestFinished | INFO | Request finished HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 70.9803ms
+2022-05-30 20:21:14.8463 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestStarting | INFO | Request starting HTTP/1.1 POST https://localhost:5001/api/Auth/login application/json;+charset=utf-8 32
+2022-05-30 20:21:14.8878 | Microsoft.AspNetCore.Routing.EndpointMiddleware+Log.ExecutingEndpoint | INFO | Executing endpoint 'FileStorageAPI.Controllers.AuthController.LoginUser (FileStorageAPI)'
+2022-05-30 20:21:14.9050 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ExecutingAction | INFO | Route matched with {action = "LoginUser", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult] LoginUser(FileStorageAPI.Models.InputModels.AuthInputModel) on controller FileStorageAPI.Controllers.AuthController (FileStorageAPI).
+2022-05-30 20:21:15.5654 | Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`5.Log | INFO | Entity Framework Core 6.0.5 initialized 'FileStorageContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.5' with options: None
+2022-05-30 20:21:16.0569 | Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`6.Log | INFO | Executed DbCommand (32ms) [Parameters=[@__userName_0='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[Id], [t].[IsDeleted], [t].[Name], [t].[Password], [t0].[Id], [t0].[Data], [t0].[IsDeleted], [t0].[Name], [t0].[Size], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [u].[Id], [u].[IsDeleted], [u].[Name], [u].[Password]
+    FROM [Users] AS [u]
+    WHERE [u].[Name] = @__userName_0
+) AS [t]
+LEFT JOIN (
+    SELECT [f].[Id], [f].[Data], [f].[IsDeleted], [f].[Name], [f].[Size], [f].[UserId]
+    FROM [Files] AS [f]
+    WHERE [f].[IsDeleted] = CAST(0 AS bit)
+) AS [t0] ON [t].[Id] = [t0].[UserId]
+ORDER BY [t].[Id]
+2022-05-30 20:21:16.1989 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ObjectResultExecuting | INFO | Executing OkObjectResult, writing value of type 'System.String'.
+2022-05-30 20:21:16.1989 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ExecutedAction | INFO | Executed action FileStorageAPI.Controllers.AuthController.LoginUser (FileStorageAPI) in 1295.8306ms
+2022-05-30 20:21:16.2046 | Microsoft.AspNetCore.Routing.EndpointMiddleware+Log.ExecutedEndpoint | INFO | Executed endpoint 'FileStorageAPI.Controllers.AuthController.LoginUser (FileStorageAPI)'
+2022-05-30 20:21:16.2046 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestFinished | INFO | Request finished HTTP/1.1 POST https://localhost:5001/api/Auth/login application/json;+charset=utf-8 32 - 200 - application/json;+charset=utf-8 1361.5494ms
+2022-05-30 20:21:16.4665 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestStarting | INFO | Request starting HTTP/1.1 GET https://localhost:5001/api/User/1?id=1 - -
+2022-05-30 20:21:16.4665 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestStarting | INFO | Request starting HTTP/1.1 GET https://localhost:5001/api/User/1/files?id=1 - -
+2022-05-30 20:21:16.5091 | Microsoft.AspNetCore.Routing.EndpointMiddleware+Log.ExecutingEndpoint | INFO | Executing endpoint 'FileStorageAPI.Controllers.UserController.GetUserById (FileStorageAPI)'
+2022-05-30 20:21:16.5091 | Microsoft.AspNetCore.Routing.EndpointMiddleware+Log.ExecutingEndpoint | INFO | Executing endpoint 'FileStorageAPI.Controllers.UserController.GetUserFiles (FileStorageAPI)'
+2022-05-30 20:21:16.5091 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ExecutingAction | INFO | Route matched with {action = "GetUserById", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[FileStorageAPI.Models.OutputModels.UserOutputModel]] GetUserById(Int32) on controller FileStorageAPI.Controllers.UserController (FileStorageAPI).
+2022-05-30 20:21:16.5091 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ExecutingAction | INFO | Route matched with {action = "GetUserFiles", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[FileStorageAPI.Models.OutputModels.StoragedFileOutputModel]]] GetUserFiles(Int32) on controller FileStorageAPI.Controllers.UserController (FileStorageAPI).
+2022-05-30 20:21:16.5194 | Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`5.Log | INFO | Entity Framework Core 6.0.5 initialized 'FileStorageContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.5' with options: None
+2022-05-30 20:21:16.5194 | Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`5.Log | INFO | Entity Framework Core 6.0.5 initialized 'FileStorageContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.5' with options: None
+2022-05-30 20:21:16.5367 | Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`6.Log | INFO | Executed DbCommand (8ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[Id], [t].[IsDeleted], [t].[Name], [t].[Password], [t0].[Id], [t0].[Data], [t0].[IsDeleted], [t0].[Name], [t0].[Size], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [u].[Id], [u].[IsDeleted], [u].[Name], [u].[Password]
+    FROM [Users] AS [u]
+    WHERE [u].[Id] = @__id_0
+) AS [t]
+LEFT JOIN (
+    SELECT [f].[Id], [f].[Data], [f].[IsDeleted], [f].[Name], [f].[Size], [f].[UserId]
+    FROM [Files] AS [f]
+    WHERE [f].[IsDeleted] = CAST(0 AS bit)
+) AS [t0] ON [t].[Id] = [t0].[UserId]
+ORDER BY [t].[Id]
+2022-05-30 20:21:16.5604 | Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`6.Log | INFO | Executed DbCommand (24ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[Id], [t].[IsDeleted], [t].[Name], [t].[Password], [t0].[Id], [t0].[Data], [t0].[IsDeleted], [t0].[Name], [t0].[Size], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [u].[Id], [u].[IsDeleted], [u].[Name], [u].[Password]
+    FROM [Users] AS [u]
+    WHERE [u].[Id] = @__id_0
+) AS [t]
+LEFT JOIN (
+    SELECT [f].[Id], [f].[Data], [f].[IsDeleted], [f].[Name], [f].[Size], [f].[UserId]
+    FROM [Files] AS [f]
+    WHERE [f].[IsDeleted] = CAST(0 AS bit)
+) AS [t0] ON [t].[Id] = [t0].[UserId]
+ORDER BY [t].[Id]
+2022-05-30 20:21:16.5646 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ObjectResultExecuting | INFO | Executing OkObjectResult, writing value of type 'FileStorageAPI.Models.OutputModels.UserOutputModel'.
+2022-05-30 20:21:16.5646 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ObjectResultExecuting | INFO | Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[FileStorageAPI.Models.OutputModels.StoragedFileOutputModel, FileStorageAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2022-05-30 20:21:16.5646 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ExecutedAction | INFO | Executed action FileStorageAPI.Controllers.UserController.GetUserById (FileStorageAPI) in 54.0129ms
+2022-05-30 20:21:16.5646 | Microsoft.AspNetCore.Routing.EndpointMiddleware+Log.ExecutedEndpoint | INFO | Executed endpoint 'FileStorageAPI.Controllers.UserController.GetUserById (FileStorageAPI)'
+2022-05-30 20:21:16.5646 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ExecutedAction | INFO | Executed action FileStorageAPI.Controllers.UserController.GetUserFiles (FileStorageAPI) in 55.9702ms
+2022-05-30 20:21:16.5646 | Microsoft.AspNetCore.Routing.EndpointMiddleware+Log.ExecutedEndpoint | INFO | Executed endpoint 'FileStorageAPI.Controllers.UserController.GetUserFiles (FileStorageAPI)'
+2022-05-30 20:21:16.5646 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestFinished | INFO | Request finished HTTP/1.1 GET https://localhost:5001/api/User/1?id=1 - - - 200 - application/json;+charset=utf-8 102.9129ms
+2022-05-30 20:21:16.5646 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestFinished | INFO | Request finished HTTP/1.1 GET https://localhost:5001/api/User/1/files?id=1 - - - 200 - application/json;+charset=utf-8 104.1950ms
+2022-05-30 20:21:30.9001 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestStarting | INFO | Request starting HTTP/1.1 POST https://localhost:5001/api/StoragedFile application/json;+charset=utf-8 129
+2022-05-30 20:21:30.9001 | Microsoft.AspNetCore.Routing.EndpointMiddleware+Log.ExecutingEndpoint | INFO | Executing endpoint 'FileStorageAPI.Controllers.StoragedFileController.PostFile (FileStorageAPI)'
+2022-05-30 20:21:30.9001 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ExecutingAction | INFO | Route matched with {action = "PostFile", controller = "StoragedFile"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Int32]] PostFile(FileStorageAPI.Models.InputModels.StoragedFileInputModel) on controller FileStorageAPI.Controllers.StoragedFileController (FileStorageAPI).
+2022-05-30 20:21:30.9433 | Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`5.Log | INFO | Entity Framework Core 6.0.5 initialized 'FileStorageContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.5' with options: None
+2022-05-30 20:21:30.9433 | Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`6.Log | INFO | Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[Id], [t].[IsDeleted], [t].[Name], [t].[Password], [t0].[Id], [t0].[Data], [t0].[IsDeleted], [t0].[Name], [t0].[Size], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [u].[Id], [u].[IsDeleted], [u].[Name], [u].[Password]
+    FROM [Users] AS [u]
+    WHERE [u].[Id] = @__id_0
+) AS [t]
+LEFT JOIN (
+    SELECT [f].[Id], [f].[Data], [f].[IsDeleted], [f].[Name], [f].[Size], [f].[UserId]
+    FROM [Files] AS [f]
+    WHERE [f].[IsDeleted] = CAST(0 AS bit)
+) AS [t0] ON [t].[Id] = [t0].[UserId]
+ORDER BY [t].[Id]
+2022-05-30 20:21:30.9929 | Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`6.Log | INFO | Executed DbCommand (2ms) [Parameters=[@__user_Id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[IsDeleted], [u].[Name], [u].[Password]
+FROM [Users] AS [u]
+WHERE [u].[Id] = @__user_Id_0
+2022-05-30 20:21:31.0556 | Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`6.Log | INFO | Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 8000) (DbType = Binary), @p1='?' (DbType = Boolean), @p2='?' (Size = 4000), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Files] ([Data], [IsDeleted], [Name], [Size], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4);
+SELECT [Id]
+FROM [Files]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+2022-05-30 20:21:31.0807 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ObjectResultExecuting | INFO | Executing OkObjectResult, writing value of type 'System.Int32'.
+2022-05-30 20:21:31.0807 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ExecutedAction | INFO | Executed action FileStorageAPI.Controllers.StoragedFileController.PostFile (FileStorageAPI) in 175.5282ms
+2022-05-30 20:21:31.0807 | Microsoft.AspNetCore.Routing.EndpointMiddleware+Log.ExecutedEndpoint | INFO | Executed endpoint 'FileStorageAPI.Controllers.StoragedFileController.PostFile (FileStorageAPI)'
+2022-05-30 20:21:31.0807 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestFinished | INFO | Request finished HTTP/1.1 POST https://localhost:5001/api/StoragedFile application/json;+charset=utf-8 129 - 200 - application/json;+charset=utf-8 182.6382ms
+2022-05-30 20:21:31.0990 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestStarting | INFO | Request starting HTTP/1.1 GET https://localhost:5001/api/User/1/files?id=1 - -
+2022-05-30 20:21:31.0990 | Microsoft.AspNetCore.Routing.EndpointMiddleware+Log.ExecutingEndpoint | INFO | Executing endpoint 'FileStorageAPI.Controllers.UserController.GetUserFiles (FileStorageAPI)'
+2022-05-30 20:21:31.0990 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ExecutingAction | INFO | Route matched with {action = "GetUserFiles", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.List`1[FileStorageAPI.Models.OutputModels.StoragedFileOutputModel]]] GetUserFiles(Int32) on controller FileStorageAPI.Controllers.UserController (FileStorageAPI).
+2022-05-30 20:21:31.0990 | Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`5.Log | INFO | Entity Framework Core 6.0.5 initialized 'FileStorageContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.5' with options: None
+2022-05-30 20:21:31.0990 | Microsoft.EntityFrameworkCore.Diagnostics.EventDefinition`6.Log | INFO | Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[Id], [t].[IsDeleted], [t].[Name], [t].[Password], [t0].[Id], [t0].[Data], [t0].[IsDeleted], [t0].[Name], [t0].[Size], [t0].[UserId]
+FROM (
+    SELECT TOP(1) [u].[Id], [u].[IsDeleted], [u].[Name], [u].[Password]
+    FROM [Users] AS [u]
+    WHERE [u].[Id] = @__id_0
+) AS [t]
+LEFT JOIN (
+    SELECT [f].[Id], [f].[Data], [f].[IsDeleted], [f].[Name], [f].[Size], [f].[UserId]
+    FROM [Files] AS [f]
+    WHERE [f].[IsDeleted] = CAST(0 AS bit)
+) AS [t0] ON [t].[Id] = [t0].[UserId]
+ORDER BY [t].[Id]
+2022-05-30 20:21:31.1121 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ObjectResultExecuting | INFO | Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[FileStorageAPI.Models.OutputModels.StoragedFileOutputModel, FileStorageAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2022-05-30 20:21:31.1121 | Microsoft.AspNetCore.Mvc.MvcCoreLoggerExtensions.ExecutedAction | INFO | Executed action FileStorageAPI.Controllers.UserController.GetUserFiles (FileStorageAPI) in 14.5768ms
+2022-05-30 20:21:31.1121 | Microsoft.AspNetCore.Routing.EndpointMiddleware+Log.ExecutedEndpoint | INFO | Executed endpoint 'FileStorageAPI.Controllers.UserController.GetUserFiles (FileStorageAPI)'
+2022-05-30 20:21:31.1121 | Microsoft.AspNetCore.Hosting.HostingApplicationDiagnostics.LogRequestFinished | INFO | Request finished HTTP/1.1 GET https://localhost:5001/api/User/1/files?id=1 - - - 200 - application/json;+charset=utf-8 17.5514ms

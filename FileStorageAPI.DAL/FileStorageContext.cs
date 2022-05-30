@@ -17,6 +17,9 @@ namespace FileStorageAPI.DAL
         {
             modelBuilder.Entity<User>().ToTable("Users");
             modelBuilder.Entity<StoragedFile>().ToTable("Files");
+
+            modelBuilder.Entity<User>().HasData
+                ( new User() { Id = 1, Name ="Test", Password = "1000:R/4LvuC7c2NZWrLyYB8dMb/zLcbmIOR+:tyM5iL0S1QoFEX+KcG52rq+PESs=" });
         }
     }
     internal class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<FileStorageContext>

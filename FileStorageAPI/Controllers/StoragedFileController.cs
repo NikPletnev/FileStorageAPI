@@ -42,7 +42,7 @@ namespace FileStorageAPI.Controllers
         [Authorize]
         [HttpPost]
         [SwaggerOperation(Summary = "Add new file")]
-        public async Task<ActionResult<int>> PostFile(StoragedFileInputModel model)
+        public async Task<ActionResult<int>> PostFile([FromBody]StoragedFileInputModel model)
         {
             var fileId = await _storagedFileSirvice.AddStoragedFile(_mapper.Map<StoragedFileModel>(model));
             return Ok(fileId);

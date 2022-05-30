@@ -18,7 +18,7 @@ namespace FileStorageAPI.DAL.Repositories
         }
         public async Task<User> GetUserById(int? id) =>
             await _context.Users.Where(x => x.Id == id)
-            .Include(w => w.StoragedFiles)
+            .Include(w => w.StoragedFiles.Where(c => c.IsDeleted != true))
             .FirstOrDefaultAsync();
 
         public async Task<List<User>> GetAllUsers() =>
@@ -54,7 +54,7 @@ namespace FileStorageAPI.DAL.Repositories
         public async Task<User> GetUserByName(string userName)
         {
             return await _context.Users.Where(x => x.Name == userName)
-            .Include(w => w.StoragedFiles)
+            .Include(w => w.StoragedFiles.Where(c => c.IsDeleted != true))
             .FirstOrDefaultAsync();
         }
     }

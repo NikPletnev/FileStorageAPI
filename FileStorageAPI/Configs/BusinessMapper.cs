@@ -20,7 +20,8 @@ namespace FileStorageAPI.Configs
 
             CreateMap<StoragedFileModel, StoragedFileOutputModel>();
             CreateMap<StoragedFileInputModel, StoragedFileModel>()
-                .ForMember(m => m.User, opt => opt.MapFrom(o => new UserModel { Id = o.UserId}));
+                .ForMember(m => m.User, opt => opt.MapFrom(o => new UserModel { Id = o.UserId}))
+                .ForMember(m => m.Data, opt => opt.MapFrom(o => Convert.FromBase64String(o.Data)));
 
         }
 

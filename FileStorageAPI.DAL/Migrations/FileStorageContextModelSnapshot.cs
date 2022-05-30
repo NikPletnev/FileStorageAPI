@@ -32,8 +32,7 @@ namespace FileStorageAPI.DAL.Migrations
 
                     b.Property<byte[]>("Data")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varbinary(30)");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");

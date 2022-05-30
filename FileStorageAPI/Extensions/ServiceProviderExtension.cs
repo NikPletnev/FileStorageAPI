@@ -19,7 +19,7 @@ namespace FileStorageAPI.Extensions
             services.AddScoped<IAuthService, AuthService>();
         }
 
-        public static void RegisterDogSitterRepositories(this IServiceCollection services)
+        public static void RegisterFileStorageRepositories(this IServiceCollection services)
         {
             services.AddScoped<IStoragedFileRepository, StoragedFileRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -28,8 +28,8 @@ namespace FileStorageAPI.Extensions
         public static void AddConnectionString(this IServiceCollection services, string connectionString)
         {
             services.AddDbContext<FileStorageContext>(
-                options => options.UseSqlServer(
-            connectionString));
+                options => options.UseSqlServer(connectionString));
+
         }
 
         public static void RegisterLogger(this IServiceCollection service, IConfiguration config)

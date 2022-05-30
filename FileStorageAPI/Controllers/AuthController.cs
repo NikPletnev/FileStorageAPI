@@ -1,6 +1,5 @@
 ﻿using FileStorageAPI.BLL.Services;
 using FileStorageAPI.Models.InputModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 namespace FileStorageAPI.Controllers

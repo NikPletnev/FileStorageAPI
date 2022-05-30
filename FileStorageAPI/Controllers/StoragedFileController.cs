@@ -1,11 +1,9 @@
 ﻿using AutoMapper;
 using FileStorageAPI.BLL.Models;
 using FileStorageAPI.BLL.Services;
-using FileStorageAPI.Extensions;
 using FileStorageAPI.Models.InputModels;
 using FileStorageAPI.Models.OutputModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 namespace FileStorageAPI.Controllers
@@ -42,7 +40,7 @@ namespace FileStorageAPI.Controllers
         [Authorize]
         [HttpPost]
         [SwaggerOperation(Summary = "Add new file")]
-        public async Task<ActionResult<int>> PostFile([FromBody]StoragedFileInputModel model)
+        public async Task<ActionResult<int>> PostFile([FromBody] StoragedFileInputModel model)
         {
             var fileId = await _storagedFileSirvice.AddStoragedFile(_mapper.Map<StoragedFileModel>(model));
             return Ok(fileId);

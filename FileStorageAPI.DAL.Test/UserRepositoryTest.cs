@@ -41,7 +41,7 @@ namespace FileStorageAPI.DAL.Test
         {
             var expected = await _context.Users.FindAsync(id);
 
-            var actual =  await _repository.GetUserById(id);
+            var actual = await _repository.GetUserById(id);
 
             Assert.AreEqual(expected, actual);
         }

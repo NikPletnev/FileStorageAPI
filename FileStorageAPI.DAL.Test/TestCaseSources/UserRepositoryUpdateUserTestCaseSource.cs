@@ -1,10 +1,6 @@
 ﻿using FileStorageAPI.DAL.Entity;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FileStorageAPI.DAL.Test.TestCaseSources
 {
@@ -23,7 +19,7 @@ namespace FileStorageAPI.DAL.Test.TestCaseSources
                 };
             int id = 2;
 
-            yield return new Object[] { user, user , id};
+            yield return new Object[] { user, user, id };
         }
     }
 }

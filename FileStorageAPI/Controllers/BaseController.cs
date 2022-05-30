@@ -1,12 +1,4 @@
-﻿using AutoMapper;
-using FileStorageAPI.BLL.Models;
-using FileStorageAPI.BLL.Services;
-using FileStorageAPI.Extensions;
-using FileStorageAPI.Models.InputModels;
-using FileStorageAPI.Models.OutputModels;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.AspNetCore.Annotations;
+﻿using Microsoft.AspNetCore.Mvc;
 namespace FileStorageAPI.Controllers
 {
     public class BaseController : Controller
